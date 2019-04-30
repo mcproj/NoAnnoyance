@@ -1,4 +1,3 @@
-#import <Preferences/Preferences.h>
 #import "NoAnnoyancePrefs.h"
 
 @implementation NoAnnoyancePrefsListController

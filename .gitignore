@@ -4,3 +4,5 @@ obj
 _
 *.deb
 *.psd
+
+/packages/

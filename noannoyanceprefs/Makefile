@@ -1,8 +1,6 @@
-TARGET = iphone:clang::7.0
+ARCHS = armv7 armv7s arm64 arm64e
 
-include theos/makefiles/common.mk
-
-export ARCHS = armv7 armv7s arm64
+include $(THEOS)/makefiles/common.mk
 
 BUNDLE_NAME = NoAnnoyancePrefs
 NoAnnoyancePrefs_FILES = NoAnnoyancePrefs.mm NoAnnoyanceSettings.mm NoAnnoyanceHeader.mm
