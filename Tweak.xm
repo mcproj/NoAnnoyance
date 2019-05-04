@@ -54,9 +54,6 @@ static void reloadSettingsNotification(CFNotificationCenterRef notificationCente
 
 %ctor {
     @autoreleasepool {
-        NSString * bundleId = [[NSBundle mainBundle] bundleIdentifier];
-        PNLog(@"Running in %@", bundleId);
-
         %init(GameCenter);
 
         CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)reloadSettingsNotification, CFSTR("com.subdiox.noannoyance/settingsupdated"), NULL, CFNotificationSuspensionBehaviorCoalesce);
