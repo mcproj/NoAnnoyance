@@ -1,7 +1,7 @@
 NoAnnoyance
 ============
 
-A CydiaSubstrate tweak to disable annoying system alerts in iOS12.
+A CydiaSubstrate tweak to suppress annoying system alerts in iOS12.
 
 Supported alerts:
 
