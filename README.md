@@ -1,29 +1,21 @@
 NoAnnoyance
 ============
 
-A CydiaSubstrate tweak to disable annoying iOS7 messages.
+A CydiaSubstrate tweak to disable annoying system alerts in iOS12.
 
 Supported alerts:
 
-+ Cellular data is not enabled
-+ Disable airplane mode to access data
-+ Turn Off Airplane Mode or Use Wi-Fi to Access Data
-+ Location accuracy improved by enabling Wi-Fi
-+ Unsupported charging accessory
-+ Accessory unerliable
-+ Low battery
-+ Cellular data is turned off for "AppName" disabled
-+ Low disk space
-+ Trust this computer
-+ Shake to undo
-
-+ The mail server "x" is not responding
-
-+ Silence siri alert tones
-
-+ Disable updated app dot
-
-+ Disable game center welcome banner
+- Cellular Data is Turned Off
+- Cellular Data is Turned Off for <AppName>
+- Wi-Fi is Turned Off for <AppName>
+- Turn Off Airplane Mode
+- Improve Location Accuracy
+- Accessory Not Certified
+- Low Battery: Device
+- Low Battery: Accessory
+- Storage Almost Full
+- "App Updated" Dot // not alert
+- Trust This Computer
 
 ---
 
