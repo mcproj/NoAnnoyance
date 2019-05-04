@@ -1,49 +1,40 @@
 #import <substrate.h>
 #import <Logging.h>
 
-#define settings_FILE @"/var/mobile/Library/Preferences/com.pNre.noannoyance.plist"
+#define settings_FILE @"/var/mobile/Library/Preferences/com.subdiox.noannoyance.plist"
 
 struct NoAnnoyanceSettings {
     BOOL GloballyEnabledInFullScreen;
     BOOL GloballyEnabled;
 
     struct {
-        BOOL ImproveLocationAccuracy;
+        BOOL CellularDataIsTurnedOff;
         BOOL CellularDataIsTurnedOffFor;
-        BOOL EdgeAlert;
-        BOOL AirplaneCellPrompt;
-        BOOL AirplaneDataPrompt;
-        BOOL LowBatteryAlert;
-        BOOL LowDiskSpaceAlert;
-        BOOL ShakeToUndo;
-        BOOL UpdatedAppDot;
+        BOOL WifiIsTurnedOffFor;
+        BOOL TurnOffAirplaneMode;
+        BOOL ImproveLocationAccuracy;
+        BOOL AccessoryUnreliable;
+        BOOL LowBatteryDevice;
+        BOOL LowBatteryAccessory;
+        BOOL LowDiskSpace;
+        BOOL AppUpdatedDot;
+        NSUInteger TrustThisComputer;
     } SpringBoard;
-
-    struct {
-        BOOL ConnectionFailed;
-    } Mail;
 
     struct {
         BOOL Banner;
     } GameCenter;
-
-    struct {
-        NSUInteger TrustThisComputer;
-        BOOL AccessoryUnreliable;
-    } Security;
 };
 
 @interface NoAnnoyance : NSObject
 
 @property (nonatomic, readonly) NSMutableDictionary * strings;
-
-@property (nonatomic, readonly) NSMutableArray * EnabledApps;
-@property (nonatomic, readonly) NSMutableArray * EnabledAppsInFullscreen;
+@property (nonatomic, readonly) NSMutableArray * enabledApps;
+@property (nonatomic, readonly) NSMutableArray * enabledAppsInFullscreen;
 
 + (instancetype)sharedInstance;
 + (BOOL)canHook;
-
 - (void)loadSettings;
-
 - (struct NoAnnoyanceSettings)settings;
+
 @end

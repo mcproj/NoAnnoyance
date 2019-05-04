@@ -3,7 +3,6 @@
 @implementation NoAnnoyancePrefsListController
 
 - (id)specifiers {
-
 	if (_specifiers == nil)
 		_specifiers = [[self loadSpecifiersFromPlistName:@"NoAnnoyance" target:self] retain];
 
@@ -11,8 +10,7 @@
 }
 
 - (void)twitter {
-
-    NSString * _user = @"_pNre";
+    NSString * _user = @"subdiox";
 
     if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"tweetbot:"]]) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[@"tweetbot:///user_profile/" stringByAppendingString:_user]]];

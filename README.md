@@ -29,5 +29,5 @@ Supported alerts:
 
 To install:
 
-1. Add repo.pnre.co as a new source in Cydia
+1. Add https://subdiox.com/repo as a new source in Cydia/Sileo
 2. Search for `NoAnnoyance` and install it

@@ -1,11 +1,10 @@
+THEOS_DEVICE_IP = 192.168.11.10
+
 ARCHS = armv7 armv7s arm64 arm64e
 
 include $(THEOS)/makefiles/common.mk
 
-# this is baaad
-THEOS_INCLUDE_PATH = include -I . -I /opt/theos/include
-
-export ARCHS = armv7 arm64
+THEOS_INCLUDE_PATH = include -I . -I $(THEOS)/include
 
 TWEAK_NAME = NoAnnoyance
 NoAnnoyance_FILES = Tweak.xm SpringBoard.xm NoAnnoyance.xm

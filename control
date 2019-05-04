@@ -1,10 +1,10 @@
 Package: com.subdiox.noannoyance
 Name: NoAnnoyance
 Depends: mobilesubstrate, preferenceloader, firmware (>= 8), applist (>= 1.5)
-Version: 1.0.0
+Breaks: com.pNre.noannoyance
+Version: 1.0.1
 Architecture: iphoneos-arm
 Description: Tame iOS annoying alerts!
-Depiction: http://repo.pnre.co/tweaks/noannoyance/
 Maintainer: subdiox
 Author: subdiox
 Section: Tweaks

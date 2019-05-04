@@ -4,10 +4,7 @@
 }
 @end
 
-@interface NoAnnoyanceMLSettingsListController : PSListController {
-}
-@end
-
 @interface NoAnnoyanceGCSettingsListController : PSListController {
 }
+
 @end

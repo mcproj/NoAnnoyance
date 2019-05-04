@@ -2,4 +2,5 @@
 
 @interface NoAnnoyancePrefsListController: PSListController {
 }
+
 @end

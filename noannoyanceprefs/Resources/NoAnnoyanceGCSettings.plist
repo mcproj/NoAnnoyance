@@ -14,11 +14,11 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Disable welcome banner</string>
+			<string>Disable Welcome Banner</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 	</array>
 </dict>

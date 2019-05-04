@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>NoAnnoyancePrefs</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.pnre.noannoyanceprefs</string>
+	<string>com.subdiox.noannoyanceprefs</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

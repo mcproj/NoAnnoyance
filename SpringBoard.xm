@@ -22,189 +22,167 @@
 
 %hook SBApplication
 
+// AppUpdatedDot: iOS 7 ~ 12
 - (BOOL)_isRecentlyUpdated {
-    return [NoAnnoyance sharedInstance].settings.SpringBoard.UpdatedAppDot ? NO : %orig;
+    return [NoAnnoyance sharedInstance].settings.SpringBoard.AppUpdatedDot ? NO : %orig;
 }
 
 %end
 
 %hook SBAlertItemsController
 
-static inline void SBAlertItemDiscard(SBAlertItemsController * controller, SBAlertItem * alert) {
-
+static inline void discardAlertItem(SBAlertItemsController *controller, SBAlertItem *alert) {
     if ([alert isKindOfClass:[%c(SBUserNotificationAlert) class]]) {
-
-        if ([[(SBUserNotificationAlert *)alert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"Security.TrustThisComputer"]]) {
-
-            int response = ([NoAnnoyance sharedInstance].settings.Security.TrustThisComputer == 2);
-
-            [(SBUserNotificationAlert *)alert _setActivated:NO];
-            [(SBUserNotificationAlert *)alert _sendResponse:response];
-
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"SBUserNotificationDoneNotification" object:alert];
-
-            [(SBUserNotificationAlert *)alert _cleanup];
-
+        SBUserNotificationAlert *unAlert = (SBUserNotificationAlert *)alert;
+        if ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.TrustThisComputer"]]) {
+            int response = ([NoAnnoyance sharedInstance].settings.SpringBoard.TrustThisComputer == 2);
+            [unAlert _setActivated:NO];
+            [unAlert _sendResponse:response];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"SBUserNotificationDoneNotification" object:unAlert];
+            [unAlert _cleanup];
         } else {
-
-            [controller deactivateAlertItem:alert];
-            [(SBUserNotificationAlert *)alert cancel];
-
+            [controller deactivateAlertItem:unAlert];
+            [unAlert cancel];
         }
     } else {
-
         [controller deactivateAlertItem:alert];
-
     }
-
 }
 
 - (void)activateAlertItem:(SBAlertItem *)alert {
+    PNLog(@"%@", alert);
 
-    //  Can I catch this alert?
-    if (![NoAnnoyance canHook] || [alert isKindOfClass:%c(SBNoAnnoyanceAlertItem)]) {
-        %orig;
+    // CellularDataIsTurnedOff: iOS 3 ~ 7
+    if ([alert isKindOfClass:[%c(SBEdgeActivationAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.CellularDataIsTurnedOff) {
+        discardAlertItem(self, alert);
         return;
     }
 
-    if ([alert isKindOfClass:[%c(SBLowPowerAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.LowBatteryAlert) {
-        SBAlertItemDiscard(self, alert);
-        return;
-    }
-
+    // TurnOffAirplaneMode: iOS 3 ~ 10
     if ([alert isKindOfClass:[%c(SBLaunchAlertItem) class]]) {
-
         int _type = MSHookIvar<int>(alert, "_type");
-        char _isDataAlert = MSHookIvar<char>(alert, "_isDataAlert");
-        char _usesCellNetwork = MSHookIvar<char>(alert, "_usesCellNetwork");
-
-        PNLog(@"SBLaunchAlertItem %d, %d, %d", _type, _isDataAlert, _usesCellNetwork);
+        BOOL _isDataAlert = MSHookIvar<BOOL>(alert, "_isDataAlert");
 
         if (_type == 1) {
-
-            BOOL cellPrompt = (_isDataAlert != 0 && _usesCellNetwork != 0) && [NoAnnoyance sharedInstance].settings.SpringBoard.AirplaneCellPrompt;
-            BOOL dataPrompt = (_isDataAlert != 0 && _usesCellNetwork != 1) && [NoAnnoyance sharedInstance].settings.SpringBoard.AirplaneDataPrompt;
-
-            if (cellPrompt || dataPrompt) {
-
-                SBAlertItemDiscard(self, alert);
+            if (_isDataAlert && [NoAnnoyance sharedInstance].settings.SpringBoard.TurnOffAirplaneMode) {
+                discardAlertItem(self, alert);
                 return;
-
             }
-
         }
     }
-
-    if ([alert isKindOfClass:[%c(SBEdgeActivationAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.EdgeAlert) {
-
-        SBAlertItemDiscard(self, alert);
+    
+    // TurnOffAirplaneMode: iOS 11 ~ 12
+    if ([alert isKindOfClass:[%c(SBApplicationLaunchNotifyAirplaneModeAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.TurnOffAirplaneMode) {
+        discardAlertItem(self, alert);
         return;
-
     }
 
-    if ([alert isKindOfClass:[%c(SBDiskSpaceAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.LowDiskSpaceAlert) {
-
-        SBAlertItemDiscard(self, alert);
+    // LowBatteryDevice: iOS 3 ~ 12
+    if ([alert isKindOfClass:[%c(SBLowPowerAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.LowBatteryDevice) {
+        discardAlertItem(self, alert);
         return;
-
     }
 
-    if ([alert isKindOfClass:[%c(SBUserNotificationAlert) class]])
-    {
+    // LowBatteryAccessory: iOS 9.3.3 ~ 12
+    if ([alert isKindOfClass:[%c(SBBluetoothAccessoryLowPowerAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.LowBatteryAccessory) {
+        discardAlertItem(self, alert);
+        return;
+    }
+
+    // LowDiskSpace: iOS 3 ~ 10
+    if ([alert isKindOfClass:[%c(SBDiskSpaceAlertItem) class]] && [NoAnnoyance sharedInstance].settings.SpringBoard.LowDiskSpace) {
+        discardAlertItem(self, alert);
+        return;
+    }
+
+    // Others: iOS 3 ~ 12
+    if ([alert isKindOfClass:[%c(SBUserNotificationAlert) class]]) {
         PNLog(@"SBUserNotificationAlert %@, %@", [(SBUserNotificationAlert *)alert alertMessage], [(SBUserNotificationAlert *)alert alertHeader]);
         PNLog(@"%@", [NoAnnoyance sharedInstance].strings);
+        SBUserNotificationAlert *unAlert = (SBUserNotificationAlert *)alert;
+        if (([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.CellularDataIsTurnedOff"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.CellularDataIsTurnedOff) ||
+            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.CellularDataIsTurnedOffFor"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.CellularDataIsTurnedOffFor) ||
+            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.WifiIsTurnedOffFor"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.WifiIsTurnedOffFor) ||
+            ([[unAlert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.ImproveLocationAccuracy"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.ImproveLocationAccuracy) ||
+            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.AccessoryUnreliable"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.AccessoryUnreliable) ||
+            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.TrustThisComputer"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.TrustThisComputer)) {
 
-        if (
-            ([[(SBUserNotificationAlert *)alert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.ImproveLocationAccuracy"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.ImproveLocationAccuracy) ||
-            ([[(SBUserNotificationAlert *)alert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.CellularDataIsTurnedOffFor"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.CellularDataIsTurnedOffFor) ||
-            ([[(SBUserNotificationAlert *)alert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"Security.TrustThisComputer"]] && [NoAnnoyance sharedInstance].settings.Security.TrustThisComputer) ||
-            ([[(SBUserNotificationAlert *)alert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"Security.AccessoryUnreliable"]] && [NoAnnoyance sharedInstance].settings.Security.AccessoryUnreliable)) {
-
-            SBAlertItemDiscard(self, alert);
+            discardAlertItem(self, alert);
             return;
         }
 
     }
 
+    // Other Notifications
     %orig;
-
 }
 
 %end
 
 %end
 
-static void initializeSpringBoardStrings() {
-
-    //  load IMPROVE_LOCATION_ACCURACY_WIFI string from its bundle
+static void loadSpringBoardStrings() {
+    // load IMPROVE_LOCATION_ACCURACY_WIFI string from its bundle
     NSBundle * coreLocationBundle = [[NSBundle alloc] initWithPath:@"/System/Library/Frameworks/CoreLocation.framework"];
 
     if (coreLocationBundle) {
         [NoAnnoyance sharedInstance].strings[@"SpringBoard.ImproveLocationAccuracy"] = [coreLocationBundle localizedStringForKey:@"IMPROVE_LOCATION_ACCURACY_WIFI" value:@"" table:@"locationd"];
     }
 
-    //  load YOU_CAN_TURN_ON_CELLULAR_DATA_FOR_THIS_APP_IN_settings string from its bundle
-    NSError * error = nil;
-    NSArray * directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/System/Library/Carrier Bundles" error:&error];
-    NSBundle * carrierBundle = nil;
+    // load YOU_CAN_TURN_ON_CELLULAR_DATA_FOR_THIS_APP_IN_settings string from its bundle
+    NSError *error = nil;
+    NSArray *directoryContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/System/Library/Carrier Bundles" error:&error];
+    NSBundle *carrierBundle = nil;
 
     if (!error) {
-        for (NSString * file in directoryContents) {
-            NSString * path = [@"/System/Library/Carrier Bundles" stringByAppendingPathComponent:file];
+        for (NSString *file in directoryContents) {
+            NSString *path = [@"/System/Library/Carrier Bundles" stringByAppendingPathComponent:file];
             BOOL isDirectory = NO;
-
             if ([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDirectory] && isDirectory) {
                 carrierBundle = [[NSBundle alloc] initWithPath:[NSString stringWithFormat:@"%@/Default.bundle", path]];
                 break;
             }
         }
-
         if (carrierBundle) {
             [NoAnnoyance sharedInstance].strings[@"SpringBoard.CellularDataIsTurnedOffFor"] = [carrierBundle localizedStringForKey:@"YOU_CAN_TURN_ON_CELLULAR_DATA_FOR_THIS_APP_IN_SETTINGS" value:@"" table:@"DataUsage"];
+            [NoAnnoyance sharedInstance].strings[@"SpringBoard.WifiIsTurnedOffFor"] = [carrierBundle localizedStringForKey:@"YOU_CAN_TURN_ON_WIFI_DATA_FOR_THIS_APP_IN_SETTINGS" value:@"" table:@"DataUsage"];
+            [NoAnnoyance sharedInstance].strings[@"SpringBoard.CellularDataIsTurnedOff"] = [carrierBundle localizedStringForKey:@"EDGE_OFF_FAILURE_TITLE" value:@"" table:@"AlertDialog"];
         }
     }
 
-    //  load ACCESSORY_UNRELIABLE string from its bundle
+    // load ACCESSORY_UNRELIABLE string from its bundle
     NSBundle * IAPBundle = [NSBundle bundleWithIdentifier:@"com.apple.IAP"];
 
     if (IAPBundle) {
         NSString * sDeviceClass = (__bridge NSString *)MGCopyAnswer(kMGDeviceClass);
         NSMutableString * keyName = [NSMutableString stringWithString:@"ACCESSORY_UNRELIABLE"];
 
-        if ([sDeviceClass isEqualToString:@"iPhone"])
+        if ([sDeviceClass isEqualToString:@"iPhone"]) {
             [keyName appendString:@"_IPHONE"];
-        else if ([sDeviceClass isEqualToString:@"iPad"])
+        } else if ([sDeviceClass isEqualToString:@"iPad"]) {
             [keyName appendString:@"_IPAD"];
-        else
+        } else {
             [keyName appendString:@"_IPOD"];
+        }
 
-        [NoAnnoyance sharedInstance].strings[@"Security.AccessoryUnreliable"] = [IAPBundle localizedStringForKey:keyName value:@"" table:@"Framework"];
-
-        PNLog(@"%@, %@, %@", IAPBundle, keyName, [NoAnnoyance sharedInstance].strings[@"Security.AccessoryUnreliable"]);
+        [NoAnnoyance sharedInstance].strings[@"SpringBoard.AccessoryUnreliable"] = [IAPBundle localizedStringForKey:keyName value:@"" table:@"Framework"];
     }
 
-    //  TRUST_DIALOG_HEADER
+    // load TRUST_DIALOG_HEADER string from its bundle
     NSBundle * LockdownLocalizationBundle = [[NSBundle alloc] initWithPath:@"/System/Library/Lockdown/Localization.bundle"];
 
     if (LockdownLocalizationBundle) {
-        [NoAnnoyance sharedInstance].strings[@"Security.TrustThisComputer"] = [LockdownLocalizationBundle localizedStringForKey:@"TRUST_DIALOG_HEADER" value:@"" table:@"Pairing"];
-
+        [NoAnnoyance sharedInstance].strings[@"SpringBoard.TrustThisComputer"] = [LockdownLocalizationBundle localizedStringForKey:@"TRUST_DIALOG_HEADER" value:@"" table:@"Pairing"];
     }
-
 }
 
 %ctor {
-
     @autoreleasepool {
-
         NSString * bundleId = [[NSBundle mainBundle] bundleIdentifier];
 
         if ([bundleId caseInsensitiveCompare:@"com.apple.springboard"] == NSOrderedSame) {
-            //  hook springboard
             %init(SB);
-            initializeSpringBoardStrings();
+            loadSpringBoardStrings();
         }
-
     }
-
 }

@@ -16,57 +16,57 @@
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>EDGE_ALERT</string>
+			<string>CELLULAR_DATA_IS_TURNED_OFF</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Cellular data is not enabled</string>
+			<string>Cellular Data is Turned Off</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>CELLULAR_DATA_IS_TURNED_OFF_FOR_APP_NAME</string>
+			<string>CELLULAR_DATA_IS_TURNED_OFF_FOR</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Cellular data is turned off for</string>
+			<string>Cellular Data is Turned Off for ...</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>AIRPLANE_CELL_PROMPT</string>
+			<string>WIFI_IS_TURNED_OFF_FOR</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>No data in airplane mode</string>
+			<string>Wi-Fi is Turned Off for ...</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>AIRPLANE_DATA_PROMPT</string>
+			<string>TURN_OFF_AIRPLANE_MODE</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
 			<string>Turn Off Airplane Mode</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -78,15 +78,15 @@
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>IMPROVE_LOCATION_ACCURACY_WIFI</string>
+			<string>IMPROVE_LOCATION_ACCURACY</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Location accuracy improved by enabling Wi-Fi</string>
+			<string>Improve Location Accuracy</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>footerText</key>
@@ -106,11 +106,11 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Accessory not certified</string>
+			<string>Accessory Not Certified</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -124,15 +124,29 @@
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>LOW_BATTERY_ALERT</string>
+			<string>LOW_BATTERY_DEVICE</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Low battery alert</string>
+			<string>Low Battery: Device</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>LOW_BATTERY_ACCESSORY</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>PostNotification</key>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
+			<key>label</key>
+			<string>Low Battery: Accessory</string>
+			<key>defaults</key>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -146,15 +160,15 @@
 			<key>default</key>
 			<true/>
 			<key>key</key>
-			<string>LOW_DISK_SPACE_ALERT</string>
+			<string>LOW_DISK_SPACE</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Storage almost full</string>
+			<string>Storage Almost Full</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -168,37 +182,15 @@
 			<key>default</key>
 			<false/>
 			<key>key</key>
-			<string>UPDATED_APP_DOT</string>
+			<string>APP_UPDATED_DOT</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>"App updated" dot</string>
+			<string>"App Updated" Dot</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Editing</string>
-			<key>isStaticText</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>default</key>
-			<false/>
-			<key>key</key>
-			<string>SHAKE_TO_UNDO</string>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
-			<key>label</key>
-			<string>Shake to undo</string>
-			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -216,18 +208,18 @@
 			<key>cell</key>
 			<string>PSLinkListCell</string>
 			<key>PostNotification</key>
-			<string>com.pNre.noannoyance/settingsupdated</string>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
-			<string>Trust this computer</string>
+			<string>Trust This Computer</string>
 			<key>defaults</key>
-			<string>com.pNre.noannoyance</string>
+			<string>com.subdiox.noannoyance</string>
 			<key>detail</key>
 			<string>PSListItemsController</string>
 			<key>validTitles</key>
 			<array>
-				<string>Ask every time</string>
-				<string>Don&apos;t trust</string>
-				<string>Always trust</string>
+				<string>Ask Every Time</string>
+				<string>Don&apos;t Trust</string>
+				<string>Always Trust</string>
 			</array>
 			<key>validValues</key>
 			<array>
