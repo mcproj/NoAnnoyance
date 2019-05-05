@@ -21,5 +21,5 @@ Supported alerts:
 
 To install:
 
-1. Add https://subdiox.com/repo as a new source in Cydia/Sileo
+1. Add https://subdiox.com/cydia as a new source in Cydia/Sileo
 2. Search for `NoAnnoyance` and install it
