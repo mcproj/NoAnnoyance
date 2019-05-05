@@ -37,6 +37,7 @@
         _settings.GloballyEnabledInFullScreen = NO;
         _settings.GloballyEnabled = YES;
 
+        _settings.SpringBoard.NoSimCardInstalled = YES;
         _settings.SpringBoard.CellularDataIsTurnedOff = YES;
         _settings.SpringBoard.CellularDataIsTurnedOffFor = YES;
         _settings.SpringBoard.WifiIsTurnedOffFor = YES;
@@ -45,8 +46,8 @@
         _settings.SpringBoard.AccessoryUnreliable = NO;
         _settings.SpringBoard.LowBatteryDevice = YES;
         _settings.SpringBoard.LowBatteryAccessory = YES;
+        _settings.SpringBoard.SoftwareUpdate = YES;
         _settings.SpringBoard.LowDiskSpace = YES;
-        _settings.SpringBoard.AppUpdatedDot = NO;
         _settings.SpringBoard.TrustThisComputer = 0;
 
         _settings.GameCenter.Banner = YES;
@@ -126,6 +127,8 @@
         }
     }];
 
+    if ([_settingsPlist objectForKey:@"NO_SIM_CARD_INSTALLED"])
+        _settings.SpringBoard.NoSimCardInstalled = [[_settingsPlist objectForKey:@"NO_SIM_CARD_INSTALLED"] boolValue];
     if ([_settingsPlist objectForKey:@"CELLULAR_DATA_IS_TURNED_OFF"])
         _settings.SpringBoard.CellularDataIsTurnedOff = [[_settingsPlist objectForKey:@"CELLULAR_DATA_IS_TURNED_OFF"] boolValue];
     if ([_settingsPlist objectForKey:@"CELLULAR_DATA_IS_TURNED_OFF_FOR"])
@@ -140,10 +143,10 @@
         _settings.SpringBoard.AccessoryUnreliable = [[_settingsPlist objectForKey:@"ACCESSORY_UNRELIABLE"] boolValue];
     if ([_settingsPlist objectForKey:@"LOW_BATTERY_DEVICE"])
         _settings.SpringBoard.LowBatteryDevice = [[_settingsPlist objectForKey:@"LOW_BATTERY_DEVICE"] boolValue];
+    if ([_settingsPlist objectForKey:@"SOFTWARE_UPDATE"])
+        _settings.SpringBoard.SoftwareUpdate = [[_settingsPlist objectForKey:@"SOFTWARE_UPDATE"] boolValue];
     if ([_settingsPlist objectForKey:@"LOW_DISK_SPACE"])
         _settings.SpringBoard.LowDiskSpace = [[_settingsPlist objectForKey:@"LOW_DISK_SPACE"] boolValue];
-    if ([_settingsPlist objectForKey:@"APP_UPDATED_DOT"])
-        _settings.SpringBoard.AppUpdatedDot = [[_settingsPlist objectForKey:@"APP_UPDATED_DOT"] boolValue];
     if ([_settingsPlist objectForKey:@"TRUST_THIS_COMPUTER"])
         _settings.SpringBoard.TrustThisComputer = [[_settingsPlist objectForKey:@"TRUST_THIS_COMPUTER"] integerValue];
     if ([_settingsPlist objectForKey:@"GC_BANNER"])

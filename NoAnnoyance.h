@@ -8,6 +8,7 @@ struct NoAnnoyanceSettings {
     BOOL GloballyEnabled;
 
     struct {
+        BOOL NoSimCardInstalled;
         BOOL CellularDataIsTurnedOff;
         BOOL CellularDataIsTurnedOffFor;
         BOOL WifiIsTurnedOffFor;
@@ -16,8 +17,8 @@ struct NoAnnoyanceSettings {
         BOOL AccessoryUnreliable;
         BOOL LowBatteryDevice;
         BOOL LowBatteryAccessory;
+        BOOL SoftwareUpdate;
         BOOL LowDiskSpace;
-        BOOL AppUpdatedDot;
         NSUInteger TrustThisComputer;
     } SpringBoard;
 

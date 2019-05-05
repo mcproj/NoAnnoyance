@@ -16,6 +16,20 @@
 			<key>default</key>
 			<true/>
 			<key>key</key>
+			<string>NO_SIM_CARD_INSTALLED</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>PostNotification</key>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
+			<key>label</key>
+			<string>No SIM Card Installed</string>
+			<key>defaults</key>
+			<string>com.subdiox.noannoyance</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<true/>
+			<key>key</key>
 			<string>CELLULAR_DATA_IS_TURNED_OFF</string>
 			<key>cell</key>
 			<string>PSSwitchCell</string>
@@ -152,9 +166,23 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>File System</string>
+			<string>System</string>
 			<key>isStaticText</key>
 			<true/>
+		</dict>
+		<dict>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>SOFTWARE_UPDATE</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>PostNotification</key>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
+			<key>label</key>
+			<string>Software Update</string>
+			<key>defaults</key>
+			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
 			<key>default</key>
@@ -167,28 +195,6 @@
 			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
 			<string>Storage Almost Full</string>
-			<key>defaults</key>
-			<string>com.subdiox.noannoyance</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSGroupCell</string>
-			<key>label</key>
-			<string>Icons</string>
-			<key>isStaticText</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>default</key>
-			<false/>
-			<key>key</key>
-			<string>APP_UPDATED_DOT</string>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>PostNotification</key>
-			<string>com.subdiox.noannoyance/settingsupdated</string>
-			<key>label</key>
-			<string>"App Updated" Dot</string>
 			<key>defaults</key>
 			<string>com.subdiox.noannoyance</string>
 		</dict>
