@@ -83,6 +83,20 @@
 			<string>com.subdiox.noannoyance</string>
 		</dict>
 		<dict>
+			<key>default</key>
+			<true/>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>key</key>
+			<string>FACETIME_ACTIVATION_ALERT</string>
+			<key>PostNotification</key>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
+			<key>label</key>
+			<string>Facetime/iMessage Activation</string>
+			<key>defaults</key>
+			<string>com.subdiox.noannoyance</string>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
@@ -195,6 +209,20 @@
 			<string>com.subdiox.noannoyance/settingsupdated</string>
 			<key>label</key>
 			<string>Storage Almost Full</string>
+			<key>defaults</key>
+			<string>com.subdiox.noannoyance</string>
+		</dict>
+		<dict>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>LATE_BACKUP_ALERT</string>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>PostNotification</key>
+			<string>com.subdiox.noannoyance/settingsupdated</string>
+			<key>label</key>
+			<string>iCloud Backup Late</string>
 			<key>defaults</key>
 			<string>com.subdiox.noannoyance</string>
 		</dict>

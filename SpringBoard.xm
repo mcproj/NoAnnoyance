@@ -114,7 +114,9 @@ static inline void discardAlertItem(SBAlertItemsController *controller, SBAlertI
             ([[unAlert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.ImproveLocationAccuracy"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.ImproveLocationAccuracy) ||
             ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.AccessoryUnreliable"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.AccessoryUnreliable) ||
             ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.SoftwareUpdate"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.SoftwareUpdate) ||
-            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.TrustThisComputer"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.TrustThisComputer)) {
+            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.LateBackup"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.LateBackupAlert) ||
+            ([[unAlert alertHeader] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.TrustThisComputer"]] && [NoAnnoyance sharedInstance].settings.SpringBoard.TrustThisComputer) ||
+            (([[unAlert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.FaceTimeAndiMessageSMSPrompt"]] || [[unAlert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.FaceTimeSMSPrompt"]] || [[unAlert alertMessage] isEqualToString:[NoAnnoyance sharedInstance].strings[@"SpringBoard.iMessageSMSPrompt"]]) && [NoAnnoyance sharedInstance].settings.SpringBoard.FacetimeActivationAlert)) {
 
             discardAlertItem(self, alert);
             return;
@@ -169,6 +171,14 @@ static void loadSpringBoardStrings() {
         }
     }
 
+    // load FaceTime&iMessage string from its bundle
+    NSBundle *identityservicesd = [[NSBundle alloc] initWithPath:@"/System/Library/PrivateFrameworks/IDS.framework/identityservicesd.app"];
+    if (identityservicesd) {
+        [NoAnnoyance sharedInstance].strings[@"SpringBoard.FaceTimeAndiMessageSMSPrompt"] = [identityservicesd localizedStringForKey:@"Your carrier may charge for SMS messages use to activate FaceTime and iMessage." value:@"" table:@"IDSLocalizable"];
+        [NoAnnoyance sharedInstance].strings[@"SpringBoard.FaceTimeSMSPrompt"] = [identityservicesd localizedStringForKey:@"Your carrier may charge for SMS messages used to activate FaceTime." value:@"" table:@"IDSLocalizable"];
+        [NoAnnoyance sharedInstance].strings[@"SpringBoard.iMessageSMSPrompt"] = [identityservicesd localizedStringForKey:@"Your carrier may charge for SMS messages used to activate iMessage." value:@"" table:@"IDSLocalizable"];
+    }
+
     // load ACCESSORY_UNRELIABLE string from its bundle
     NSBundle * IAPBundle = [NSBundle bundleWithIdentifier:@"com.apple.IAP"];
     if (IAPBundle) {
@@ -184,6 +194,12 @@ static void loadSpringBoardStrings() {
         }
 
         [NoAnnoyance sharedInstance].strings[@"SpringBoard.AccessoryUnreliable"] = [IAPBundle localizedStringForKey:keyName value:@"" table:@"Framework"];
+    }
+
+    // load LATE_BACKUP_ALERT_TITLE from its bundle
+    NSBundle *MobileBackupBundle = [[NSBundle alloc] initWithPath:@"/System/Library/PrivateFrameworks/MobileBackup.framework"];
+    if (MobileBackupBundle) {
+        [NoAnnoyance sharedInstance].strings[@"SpringBoard.LateBackup"] = [MobileBackupBundle localizedStringForKey:@"LATE_BACKUP_ALERT_TITLE" value:@"" table:@"MobileBackup"];
     }
 
     // load TRUST_DIALOG_HEADER string from its bundle

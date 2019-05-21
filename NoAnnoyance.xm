@@ -42,12 +42,14 @@
         _settings.SpringBoard.CellularDataIsTurnedOffFor = YES;
         _settings.SpringBoard.WifiIsTurnedOffFor = YES;
         _settings.SpringBoard.TurnOffAirplaneMode = YES;
+        _settings.SpringBoard.FacetimeActivationAlert = YES;
         _settings.SpringBoard.ImproveLocationAccuracy = YES;
         _settings.SpringBoard.AccessoryUnreliable = NO;
         _settings.SpringBoard.LowBatteryDevice = YES;
         _settings.SpringBoard.LowBatteryAccessory = YES;
         _settings.SpringBoard.SoftwareUpdate = YES;
         _settings.SpringBoard.LowDiskSpace = YES;
+        _settings.SpringBoard.LateBackupAlert = YES;
         _settings.SpringBoard.TrustThisComputer = 0;
 
         _settings.GameCenter.Banner = YES;
@@ -137,6 +139,8 @@
         _settings.SpringBoard.WifiIsTurnedOffFor = [[_settingsPlist objectForKey:@"WIFI_IS_TURNED_OFF_FOR"] boolValue];
     if ([_settingsPlist objectForKey:@"TURN_OFF_AIRPLANE_MODE"])
         _settings.SpringBoard.TurnOffAirplaneMode = [[_settingsPlist objectForKey:@"TURN_OFF_AIRPLANE_MODE"] boolValue];
+    if ([_settingsPlist objectForKey:@"FACETIME_ACTIVATION_ALERT"])
+        _settings.SpringBoard.FacetimeActivationAlert = [[_settingsPlist objectForKey:@"FACETIME_ACTIVATION_ALERT"] boolValue];
     if ([_settingsPlist objectForKey:@"IMPROVE_LOCATION_ACCURACY"])
         _settings.SpringBoard.ImproveLocationAccuracy = [[_settingsPlist objectForKey:@"IMPROVE_LOCATION_ACCURACY"] boolValue];
     if ([_settingsPlist objectForKey:@"ACCESSORY_UNRELIABLE"])
@@ -147,6 +151,8 @@
         _settings.SpringBoard.SoftwareUpdate = [[_settingsPlist objectForKey:@"SOFTWARE_UPDATE"] boolValue];
     if ([_settingsPlist objectForKey:@"LOW_DISK_SPACE"])
         _settings.SpringBoard.LowDiskSpace = [[_settingsPlist objectForKey:@"LOW_DISK_SPACE"] boolValue];
+    if ([_settingsPlist objectForKey:@"LATE_BACKUP_ALERT"])
+        _settings.SpringBoard.LateBackupAlert = [[_settingsPlist objectForKey:@"LATE_BACKUP_ALERT"] boolValue];
     if ([_settingsPlist objectForKey:@"TRUST_THIS_COMPUTER"])
         _settings.SpringBoard.TrustThisComputer = [[_settingsPlist objectForKey:@"TRUST_THIS_COMPUTER"] integerValue];
     if ([_settingsPlist objectForKey:@"GC_BANNER"])

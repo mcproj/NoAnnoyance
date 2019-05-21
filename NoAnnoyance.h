@@ -13,12 +13,14 @@ struct NoAnnoyanceSettings {
         BOOL CellularDataIsTurnedOffFor;
         BOOL WifiIsTurnedOffFor;
         BOOL TurnOffAirplaneMode;
+        BOOL FacetimeActivationAlert;
         BOOL ImproveLocationAccuracy;
         BOOL AccessoryUnreliable;
         BOOL LowBatteryDevice;
         BOOL LowBatteryAccessory;
         BOOL SoftwareUpdate;
         BOOL LowDiskSpace;
+        BOOL LateBackupAlert;
         NSUInteger TrustThisComputer;
     } SpringBoard;
 

@@ -17,6 +17,8 @@ Supported alerts:
 - Software Update
 - Storage Almost Full
 - Trust This Computer
+- FaceTime/iMessage SMS Activation (Your carrier may charge for SMS messages use to activate FaceTime/iMessage)
+- iCloud Backup Late (This iPhone hasn't been backed up in XX weeks)
 
 ---
 
